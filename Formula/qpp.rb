@@ -1,7 +1,7 @@
 class Qpp < Formula
   desc "Q++: quantum–classical compiler and simulator"
-  homepage "https://github.com/shefash/qpp"
-  url "https://github.com/shefash/qpp/archive/refs/tags/v0.2.0.tar.gz"
+  homepage "https://github.com/sefunmi4/qpp-gcc"
+  url "https://github.com/sefunmi4/qpp-gcc/archive/refs/tags/v0.2.0.tar.gz"
   sha256 "shasum -a 256 qpp-0.2.0.tar.gz"
   license "Apache-2.0"
 
