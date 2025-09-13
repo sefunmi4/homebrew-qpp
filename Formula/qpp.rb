@@ -27,7 +27,6 @@ class Qpp < Formula
     else
       binary = Dir["qpp*"].first
     end
-
     bin.install binary => "qpp"
   end
 
