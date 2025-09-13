@@ -20,6 +20,6 @@ class Qpp < Formula
   end
 
   test do
-    system "#{bin}/qpp", "--version"
+    assert_match version.to_s, shell_output("#{bin}/qpp --version")
   end
 end
