@@ -16,7 +16,8 @@ class Qpp < Formula
   license "Apache-2.0"
 
   def install
-    bin.install "qpp"
+    arch = Hardware::CPU.arm? ? "arm64" : "x64"
+    bin.install "qpp-#{version}-macos-#{arch}" => "qpp"
   end
 
   test do
