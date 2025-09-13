@@ -17,6 +17,9 @@ class Qpp < Formula
 
   def install
     binary = Dir["qpp*"].find { |f| File.file?(f) && !f.end_with?(".gz") }
+    gz_file = Dir["qpp*.gz"].first
+    system "gunzip", gz_file if gz_file
+    binary ||= gz_file ? gz_file.delete_suffix(".gz") : Dir["qpp*"].find { |f| File.file?(f) && !f.end_with?(".gz") }
     bin.install binary => "qpp"
   end
 
