@@ -16,10 +16,10 @@ class Qpp < Formula
   license "Apache-2.0"
 
   def install
-    binary = Dir["qpp*"].find { |f| File.file?(f) && !f.end_with?(".gz") }
     gz_file = Dir["qpp*.gz"].first
-    system "gunzip", gz_file if gz_file
-    binary ||= gz_file ? gz_file.delete_suffix(".gz") : Dir["qpp*"].find { |f| File.file?(f) && !f.end_with?(".gz") }
+    system "tar", "-xzf", gz_file if gz_file
+    binary = Dir["**/qpp"].find { |f| File.file?(f) && File.executable?(f) }
+    raise "No qpp binary found" unless binary
     bin.install binary => "qpp"
   end
 
