@@ -18,13 +18,9 @@ class Qpp < Formula
   def install
     gz_file = Dir["qpp*.gz"].first
     system "tar", "-xzf", gz_file if gz_file
-    extracted_dir = Dir["qpp*"].find { |d| File.directory?(d) }
-    if extracted_dir
-      libexec.install Dir["#{extracted_dir}/*"]
-    else
-      libexec.install Dir["*"].reject { |f| f.end_with?(".gz") }
-    end
-    bin.write_env_script libexec/"qpp", QPP_ROOT: libexec
+    binary = Dir["**/qpp"].find { |f| File.file?(f) && File.executable?(f) }
+    raise "No qpp binary found" unless binary
+    bin.install binary => "qpp"
   end
 
   test do
