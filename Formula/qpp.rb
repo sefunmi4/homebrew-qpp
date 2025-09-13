@@ -16,8 +16,19 @@ class Qpp < Formula
   license "Apache-2.0"
 
   def install
-    arch = Hardware::CPU.arm? ? "arm64" : "x64"
-    bin.install "qpp-#{version}-macos-#{arch}" => "qpp"
+    # The release archives contain a single prebuilt binary compressed
+    # with gzip and whose name may vary (e.g. `qpp-0.2.0-macos-arm64`).
+    # Locate the downloaded file, decompress it if needed, and install
+    # it as `qpp` so the executable is always available on the PATH.
+    archive = Dir["qpp*.gz"].first
+    if archive
+      system "gzip", "-d", archive
+      binary = archive.sub(/\.gz\z/, "")
+    else
+      binary = Dir["qpp*"].first
+    end
+
+    bin.install binary => "qpp"
   end
 
   test do
