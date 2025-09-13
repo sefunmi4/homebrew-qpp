@@ -16,7 +16,9 @@ class Qpp < Formula
   license "Apache-2.0"
 
   def install
+    system "gunzip", *Dir["qpp*.gz"] if Dir["qpp*.gz"].any?
     binary = Dir["qpp*"].find { |f| File.file?(f) && !f.end_with?(".gz") }
+    raise "No qpp binary found" unless binary
     bin.install binary => "qpp"
   end
 
