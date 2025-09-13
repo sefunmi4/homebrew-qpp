@@ -17,6 +17,11 @@ class Qpp < Formula
 
   def install
     binary = Dir["qpp*"].find { |f| File.file?(f) && !f.end_with?(".gz") }
+    if binary.nil?
+      gz_file = Dir["qpp*.gz"].first
+      system "gunzip", gz_file
+      binary = gz_file.chomp(".gz")
+    end
     bin.install binary => "qpp"
   end
 
