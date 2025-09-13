@@ -16,8 +16,12 @@ class Qpp < Formula
   license "Apache-2.0"
 
   def install
-    arch = Hardware::CPU.arm? ? "arm64" : "x64"
-    bin.install "qpp-#{version}-macos-#{arch}" => "qpp"
+    # The release archives contain a single prebuilt binary whose
+    # name may vary (e.g. `qpp-0.2.0-macos-arm64`).  Pick up whatever
+    # file matches and install it as `qpp` so the executable is always
+    # available on the PATH.
+    binary = Dir["qpp*"].first
+    bin.install binary => "qpp"
   end
 
   test do
